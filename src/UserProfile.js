@@ -3,7 +3,9 @@ import profile_picture from './profile_generic.jpeg'
 
 const UserProfile = () => {
   return (
-    <div><img src={profile_picture} /></div>
+    <div className="user-profile">
+      <img src={profile_picture} />
+    </div>
   )
 }
 

@@ -6,8 +6,10 @@ import UserDisplay from './UserDisplay'
 export default function App() {
   return (
     <>
-      <UserProfile />
-      <SearchBar />
+      <div className="user-profile-header">
+        <UserProfile />
+        <SearchBar />
+      </div>
       <UserDisplay />
     </>
   );
