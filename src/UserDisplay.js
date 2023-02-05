@@ -1,7 +1,7 @@
 import React from 'react'
 import Reviews from './Reviews'
 import Friends from './Friends'
-import { Route, Routes, Link, useResolvedPath, useMatch } from 'react-router-dom'
+import { Route, Routes, Link, useResolvedPath, useMatch, Navigate } from 'react-router-dom'
 
 export default function UserDisplay() {
 
@@ -14,7 +14,7 @@ export default function UserDisplay() {
 
 
         <Routes>
-          <Route path="/" element={<Reviews />} />
+          <Route path="/" element={ <Navigate to="/reviews" />} />
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/friends" element={<Friends />} />
         </Routes>
