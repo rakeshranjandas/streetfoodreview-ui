@@ -21,3 +21,13 @@
 .user-display li.active {
   background-color: red;
 }
+
+.user-card {
+  border: 1px solid;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  box-shadow: 10px 5px 5px red;
+  margin: 10px;
+  width: 50%;
+}
