@@ -4,11 +4,17 @@ export default function User(props) {
   const [followed, setFollowed] = React.useState(true);
 
   function unfollowUser() {
-    setFollowed(false);
+    fetch(
+      `http://localhost:8081/v1/user/1/friend/${props.userDetails.id}?type=unfollow`,
+      { method: "PUT" }
+    ).then(() => setFollowed(false));
   }
 
   function followUser() {
-    setFollowed(true);
+    fetch(
+      `http://localhost:8081/v1/user/1/friend/${props.userDetails.id}?type=follow`,
+      { method: "PUT" }
+    ).then(() => setFollowed(true));
   }
 
   return (
