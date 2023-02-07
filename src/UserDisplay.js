@@ -7,10 +7,18 @@ import {
   Link,
   useResolvedPath,
   useMatch,
-  Navigate,
+  useNavigate,
+  useLocation,
 } from "react-router-dom"
 
 export default function UserDisplay() {
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  React.useEffect(function () {
+    if (location.pathname === "/") navigate("/reviews")
+  }, [])
+
   return (
     <div className="user-display container">
       <ul className="columns">
@@ -19,7 +27,6 @@ export default function UserDisplay() {
       </ul>
 
       <Routes>
-        <Route path="/" element={<Navigate to="/reviews" />} />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/friends" element={<Friends />} />
       </Routes>
