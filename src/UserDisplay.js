@@ -15,9 +15,12 @@ export default function UserDisplay() {
   const location = useLocation()
   const navigate = useNavigate()
 
-  React.useEffect(function () {
-    if (location.pathname === "/") navigate("/reviews")
-  }, [])
+  React.useEffect(
+    function () {
+      if (location.pathname === "/") navigate("/reviews")
+    },
+    [location]
+  )
 
   return (
     <div className="user-display container">

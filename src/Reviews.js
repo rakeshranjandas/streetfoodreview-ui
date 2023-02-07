@@ -4,10 +4,18 @@ import ReviewsMap from "./ReviewsMap"
 
 export default function Reviews() {
   const [currentView, setCurrentView] = React.useState("list")
+  const [reviews, setReviews] = React.useState([])
+
+  React.useEffect(() => {
+    fetch("http://localhost:8081/v1/user/1/reviews")
+      .then((res) => res.json())
+      .then((json) => {
+        setReviews(json)
+      })
+  }, [])
 
   function changeView(e) {
-    const { name, value } = e.target
-    setCurrentView(value)
+    setCurrentView(e.target.value)
   }
 
   return (
@@ -37,7 +45,13 @@ export default function Reviews() {
         </label>
       </div>
 
-      <div>{currentView === "list" ? <ReviewsList /> : <ReviewsMap />}</div>
+      <div>
+        {currentView === "list" ? (
+          <ReviewsList reviews={reviews} />
+        ) : (
+          <ReviewsMap />
+        )}
+      </div>
     </div>
   )
 }
