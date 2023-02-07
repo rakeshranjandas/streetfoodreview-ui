@@ -38,5 +38,5 @@ export default function Reviews() {
 
       <div>{currentView === "list" ? <ReviewsList /> : <ReviewsMap />}</div>
     </div>
-  );
+  )
 }
