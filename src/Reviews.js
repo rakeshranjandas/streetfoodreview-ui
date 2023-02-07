@@ -5,32 +5,33 @@ import ReviewsMap from "./ReviewsMap"
 export default function Reviews() {
   const [currentView, setCurrentView] = React.useState("list")
 
-  function setViewToList() {
-    setCurrentView("list")
-  }
-
-  function setViewToMap() {
-    setCurrentView("map")
+  function changeView(e) {
+    const { name, value } = e.target
+    setCurrentView(value)
   }
 
   return (
     <div>
-      <div>
-        <label>
+      <div className="control columns">
+        <label className="radio column is-1">
           <input
             type="radio"
-            onClick={setViewToList}
+            onChange={changeView}
             name="reviews-view"
             checked={currentView === "list"}
+            className="mr-2"
+            value="list"
           />
           List
         </label>
-        <label>
+        <label className="radio column is-1">
           <input
             type="radio"
-            onClick={setViewToMap}
+            onChange={changeView}
             name="reviews-view"
             checked={currentView === "map"}
+            className="mr-2"
+            value="map"
           />
           Map
         </label>
