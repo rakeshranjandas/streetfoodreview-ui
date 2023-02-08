@@ -13,14 +13,6 @@
   align-items: center;
 }
 
-.user-display a.active {
-  background-color: red;
-}
-
-.user-display a:hover {
-  border: 1px solid;
-}
-
 .user-card {
   border: 1px solid;
   box-shadow: 10px 5px 5px red;
