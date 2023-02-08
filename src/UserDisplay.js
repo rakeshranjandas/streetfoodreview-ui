@@ -1,15 +1,7 @@
 import React from "react"
 import Reviews from "./Reviews"
 import Friends from "./Friends"
-import {
-  Route,
-  Routes,
-  Link,
-  useResolvedPath,
-  useMatch,
-  useNavigate,
-  useLocation,
-} from "react-router-dom"
+import { Route, Routes, Link, useNavigate, useLocation } from "react-router-dom"
 
 export default function UserDisplay() {
   const location = useLocation()
@@ -19,16 +11,17 @@ export default function UserDisplay() {
     function () {
       if (location.pathname === "/") navigate("/reviews")
     },
-    [location]
+    [location, navigate]
   )
 
   return (
-    <div className="user-display container">
-      <ul className="columns">
-        <CustomLink to="/reviews"> Reviews </CustomLink>
-        <CustomLink to="/friends"> Friends </CustomLink>
-      </ul>
-
+    <div className="container">
+      <div class="tabs is-toggle">
+        <ul>
+          <CustomLi to="/reviews">Reviews</CustomLi>
+          <CustomLi to="/friends">Friends</CustomLi>
+        </ul>
+      </div>
       <Routes>
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/friends" element={<Friends />} />
@@ -37,18 +30,14 @@ export default function UserDisplay() {
   )
 }
 
-function CustomLink({ to, children, ...props }) {
-  const resolvedPath = useResolvedPath(to)
-  const isActive = useMatch({ path: resolvedPath.pathname, end: true })
+function CustomLi({ to, children, ...props }) {
+  const location = useLocation()
 
   return (
-    <Link
-      to={to}
-      className={
-        (isActive ? "active" : "") + " column is-one-fifth has-text-centered"
-      }
-    >
-      <li>{children}</li>
-    </Link>
+    <li className={location.pathname === to ? "is-active" : ""}>
+      <Link to={to}>
+        <span>{children}</span>
+      </Link>
+    </li>
   )
 }
