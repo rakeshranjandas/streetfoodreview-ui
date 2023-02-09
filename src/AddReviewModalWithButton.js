@@ -83,6 +83,16 @@ function initializeModal() {
 }
 
 function AddReviewModal() {
+  const [curTask, setCurTask] = React.useState("add_review")
+
+  function changeTaskToAddShop() {
+    setCurTask("add_shop")
+  }
+
+  function changeTaskToAddReview() {
+    setCurTask("add_review")
+  }
+
   React.useEffect(function () {
     initializeModal()
   }, [])
@@ -92,11 +102,18 @@ function AddReviewModal() {
       <div className="modal-background"></div>
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title">Add New Review</p>
+          <p className="modal-card-title">
+            {curTask === "add_review" ? "Add New Review" : "Add New Shop"}
+          </p>
           <button className="delete" aria-label="close"></button>
         </header>
         <section className="modal-card-body">
-          <AddReviewForm />
+          <AddReviewForm
+            curTask={curTask}
+            changeTaskToAddShop={changeTaskToAddShop}
+            changeTaskToAddReview={changeTaskToAddReview}
+            closeModalAction={initializeModalActions.closeAllModals}
+          />
         </section>
       </div>
     </div>
