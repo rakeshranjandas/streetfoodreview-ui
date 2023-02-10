@@ -63,7 +63,8 @@ export default function AddReviewModal(props) {
             changeTaskToAddShop={changeTaskToAddShop}
             changeTaskToAddReview={changeTaskToAddReview}
             closeModal={closeModal}
-            curReview={props.review}
+            currentReviewAddEdit={props.currentReviewAddEdit}
+            isModalOpen={props.isModalOpen}
           />
         </section>
       </div>
