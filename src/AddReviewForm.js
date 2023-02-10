@@ -12,6 +12,7 @@ export default function AddReviewForm(props) {
         <AddReviewAddReview
           changeTaskToAddShop={props.changeTaskToAddShop}
           closeModalAction={props.closeModalAction}
+          curReview={props.curReview}
         />
       )}
     </div>

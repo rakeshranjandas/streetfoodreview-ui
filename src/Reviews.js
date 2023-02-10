@@ -1,10 +1,13 @@
 import React from "react"
 import ReviewsList from "./ReviewsList"
 import ReviewsMap from "./ReviewsMap"
+import AddReviewModal from "./AddReviewModal"
 
 export default function Reviews() {
   const [currentView, setCurrentView] = React.useState("list")
   const [reviews, setReviews] = React.useState([])
+  const [currentReviewAddEdit, setCurrentReviewAddEdit] = React.useState({})
+  const [isModalOpen, setIsModalOpen] = React.useState(false)
 
   React.useEffect(() => {
     fetch("http://localhost:8081/v1/user/1/reviews")
@@ -16,6 +19,15 @@ export default function Reviews() {
 
   function changeView(e) {
     setCurrentView(e.target.value)
+  }
+
+  function openModal(review) {
+    setCurrentReviewAddEdit(review)
+    setIsModalOpen(true)
+  }
+
+  function closeModal() {
+    setIsModalOpen(false)
   }
 
   return (
@@ -47,11 +59,17 @@ export default function Reviews() {
 
       <div>
         {currentView === "list" ? (
-          <ReviewsList reviews={reviews} />
+          <ReviewsList reviews={reviews} openModal={openModal} />
         ) : (
           <ReviewsMap />
         )}
       </div>
+
+      <AddReviewModal
+        closeModal={closeModal}
+        currentReviewAddEdit={currentReviewAddEdit}
+        isModalOpen={isModalOpen}
+      />
     </div>
   )
 }
