@@ -1,74 +1,6 @@
 import React from "react"
 import AddReviewForm from "./AddReviewForm"
 
-const initializeModalActions = {
-  openModal: function ($el) {
-    $el.classList.add("is-active")
-  },
-
-  closeModal: function ($el) {
-    $el.classList.remove("is-active")
-  },
-
-  closeAllModals: function ($el) {
-    ;(document.querySelectorAll(".modal") || []).forEach(($modal) => {
-      initializeModalActions.closeModal($modal)
-    })
-  },
-}
-
-function initializeModal(openAction, closeAction) {
-  // Functions to open and close a modal
-  function openModal($el) {
-    initializeModalActions.openModal($el)
-    openAction()
-  }
-
-  function closeModal($el) {
-    initializeModalActions.closeModal($el)
-    closeAction()
-  }
-
-  function closeAllModals() {
-    initializeModalActions.closeAllModals()
-  }
-
-  // Add a click event on buttons to open a specific modal
-  ;(document.querySelectorAll(".js-modal-trigger") || []).forEach(
-    ($trigger) => {
-      const modal = $trigger.dataset.target
-      const $target = document.getElementById(modal)
-
-      $trigger.addEventListener("click", () => {
-        openModal($target)
-      })
-    }
-  )
-
-  // Add a click event on various child elements to close the parent modal
-  ;(
-    document.querySelectorAll(
-      ".modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button"
-    ) || []
-  ).forEach(($close) => {
-    const $target = $close.closest(".modal")
-
-    $close.addEventListener("click", () => {
-      closeModal($target)
-    })
-  })
-
-  // Add a keyboard event to close all modals
-  document.addEventListener("keydown", (event) => {
-    const e = event || window.event
-
-    if (e.keyCode === 27) {
-      // Escape key
-      closeAllModals()
-    }
-  })
-}
-
 export default function AddReviewModal(props) {
   const [curTask, setCurTask] = React.useState("add_review")
 
@@ -81,32 +13,42 @@ export default function AddReviewModal(props) {
   }
 
   function closeModal() {
-    initializeModalActions.closeAllModals()
     props.closeModal()
   }
-  /*
-  React.useEffect(function () {
-    initializeModal(function () {
-      changeTaskToAddReview()
+
+  function bindCloseActions() {
+    // Add a click event on various child elements to close the parent modal
+    ;(
+      document.querySelectorAll(
+        ".modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button"
+      ) || []
+    ).forEach(($close) => {
+      $close.addEventListener("click", () => {
+        closeModal()
+      })
     })
-  }, [])
-  */
+
+    // Add a keyboard event to close all modals
+    document.addEventListener("keydown", (event) => {
+      const e = event || window.event
+
+      if (e.keyCode === 27) {
+        // Escape key
+        closeModal()
+      }
+    })
+  }
 
   React.useEffect(() => {
-    if (props.isModalOpen) {
-      initializeModal(
-        function () {
-          changeTaskToAddReview()
-        },
-        function () {
-          props.closeModal()
-        }
-      )
-    }
+    bindCloseActions()
+  }, [])
+
+  React.useEffect(() => {
+    if (props.isModalOpen) changeTaskToAddReview()
   }, [props.isModalOpen])
 
   return (
-    <div className="modal" id="modal-js-example">
+    <div className={[props.isModalOpen ? "is-active" : "", "modal"].join(" ")}>
       <div className="modal-background"></div>
       <div className="modal-card">
         <header className="modal-card-head">

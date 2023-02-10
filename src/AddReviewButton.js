@@ -8,11 +8,7 @@ export default function AddReviewButton(props) {
 
   return (
     <div>
-      <button
-        className="button is-info js-modal-trigger"
-        data-target="modal-js-example"
-        onClick={openAddReviewModal}
-      >
+      <button className="button is-info" onClick={openAddReviewModal}>
         &#43; Add New Review
       </button>
     </div>
