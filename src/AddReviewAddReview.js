@@ -75,10 +75,11 @@ export default function AddReviewAddReview(props) {
           <span class="label">Shop</span>
           <div class="control">
             <div class="select">
-              <select name="shop" defaultValue={curReview.shopId}>
+              <select name="shopId" defaultValue={curReview.shopId}>
                 <option value="0">Select</option>
-                <option value="1">Shop1</option>
-                <option value="2">Shop2</option>
+                {props.shops.map((x) => {
+                  return <option value={x.id}>{x.name}</option>
+                })}
               </select>
             </div>
           </div>
@@ -110,9 +111,10 @@ export default function AddReviewAddReview(props) {
         <label class="label">Description</label>
         <div class="control">
           <textarea
-            name="desc"
+            name="description"
             class="textarea"
             placeholder="Description"
+            defaultValue={curReview.description}
           ></textarea>
         </div>
       </div>
