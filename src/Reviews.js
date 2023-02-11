@@ -6,6 +6,7 @@ import AddReviewModal from "./AddReviewModal"
 export default function Reviews() {
   const [currentView, setCurrentView] = React.useState("list")
   const [reviews, setReviews] = React.useState([])
+  const [refreshReviews, setRefreshReviews] = React.useState(false)
   const [shops, setShops] = React.useState([])
   const [currentReviewAddEdit, setCurrentReviewAddEdit] = React.useState({})
   const [isModalOpen, setIsModalOpen] = React.useState(false)
@@ -43,6 +44,22 @@ export default function Reviews() {
       return { ...p, shopId: newShopData.id }
     })
   }
+
+  function doRefreshReviews() {
+    setRefreshReviews(true)
+  }
+
+  React.useEffect(() => {
+    if (refreshReviews) {
+      fetch("http://localhost:8081/v1/user/1/reviews")
+        .then((res) => res.json())
+        .then((json) => {
+          setReviews(json)
+        })
+
+      setRefreshReviews(false)
+    }
+  }, [refreshReviews])
 
   function changeView(e) {
     setCurrentView(e.target.value)
@@ -99,6 +116,7 @@ export default function Reviews() {
         shops={shops}
         addEditShops={addEditShops}
         isModalOpen={isModalOpen}
+        doRefreshReviews={doRefreshReviews}
       />
     </div>
   )

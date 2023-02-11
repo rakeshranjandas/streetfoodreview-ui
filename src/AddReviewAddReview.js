@@ -52,6 +52,7 @@ export default function AddReviewAddReview(props) {
 
     saveReview(formValues, function () {
       props.closeModal()
+      props.doRefreshReviews()
     })
   }
 

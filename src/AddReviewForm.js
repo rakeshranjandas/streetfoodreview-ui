@@ -21,6 +21,7 @@ export default function AddReviewForm(props) {
           currentReviewAddEdit={props.currentReviewAddEdit}
           isModalOpen={props.isModalOpen}
           shops={props.shops}
+          doRefreshReviews={props.doRefreshReviews}
         />
       )}
     </div>

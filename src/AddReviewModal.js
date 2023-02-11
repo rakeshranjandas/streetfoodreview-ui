@@ -57,6 +57,7 @@ export default function AddReviewModal(props) {
             isModalOpen={props.isModalOpen}
             shops={props.shops}
             addEditShops={props.addEditShops}
+            doRefreshReviews={props.doRefreshReviews}
           />
         </section>
       </div>
