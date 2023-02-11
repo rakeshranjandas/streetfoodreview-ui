@@ -10,21 +10,34 @@ const validationRules = {
   },
 }
 
+function saveReview(formValues, onSuccess) {
+  fetch(`http://localhost:8081/v1/user/review`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formValues),
+  }).then(() => {
+    onSuccess()
+  })
+}
+
 export default function AddReviewAddReview(props) {
-  const [curReview, setCurReview] = React.useState(
-    Object.keys(props.currentReviewAddEdit).length > 0
-      ? props.currentReviewAddEdit
-      : {
-          shopId: "0",
-          rating: "0",
-          description: "",
-        }
-  )
+  const { currentReviewAddEdit: curReview } = props
+
+  // const [curReview, setCurReview] = React.useState(
+  //   Object.keys(props.currentReviewAddEdit).length > 0
+  //     ? props.currentReviewAddEdit
+  //     : emptyReview
+  // )
 
   const [error, setError] = React.useState({})
 
   React.useEffect(() => {
-    if (props.isModalOpen) setError({})
+    if (props.isModalOpen) {
+      setError({})
+    }
   }, [props.isModalOpen])
 
   function handleSubmit(e) {
@@ -44,7 +57,10 @@ export default function AddReviewAddReview(props) {
     }
 
     if (has_error) return
-    props.closeModal()
+
+    saveReview(formValues, function () {
+      props.closeModal()
+    })
   }
 
   function closeModal() {
