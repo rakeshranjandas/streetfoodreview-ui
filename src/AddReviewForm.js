@@ -13,7 +13,10 @@ export default function AddReviewForm(props) {
           changeTaskToAddShop={props.changeTaskToAddShop}
           closeModal={props.closeModal}
           currentReviewAddEdit={props.currentReviewAddEdit}
+          setCurrentReviewAddEdit={props.setCurrentReviewAddEdit}
           isModalOpen={props.isModalOpen}
+          shops={props.shops}
+          setShops={props.setShops}
         />
       )}
     </div>

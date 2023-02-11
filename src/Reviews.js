@@ -6,6 +6,7 @@ import AddReviewModal from "./AddReviewModal"
 export default function Reviews() {
   const [currentView, setCurrentView] = React.useState("list")
   const [reviews, setReviews] = React.useState([])
+  const [shops, setShops] = React.useState([])
   const [currentReviewAddEdit, setCurrentReviewAddEdit] = React.useState({})
   const [isModalOpen, setIsModalOpen] = React.useState(false)
 
@@ -14,6 +15,12 @@ export default function Reviews() {
       .then((res) => res.json())
       .then((json) => {
         setReviews(json)
+      })
+
+    fetch("http://localhost:8081/v1/shop")
+      .then((res) => res.json())
+      .then((json) => {
+        setShops(json)
       })
   }, [])
 
@@ -68,6 +75,9 @@ export default function Reviews() {
       <AddReviewModal
         closeModal={closeModal}
         currentReviewAddEdit={currentReviewAddEdit}
+        setCurrentReviewAddEdit={setCurrentReviewAddEdit}
+        shops={shops}
+        setShops={setShops}
         isModalOpen={isModalOpen}
       />
     </div>
