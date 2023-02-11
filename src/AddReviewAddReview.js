@@ -1,7 +1,7 @@
 import React from "react"
 
 const validationRules = {
-  shop: {
+  shopId: {
     validate: (val) => {
       let x = parseInt(val)
       return typeof x === "number" && x > 0
@@ -67,7 +67,7 @@ export default function AddReviewAddReview(props) {
             </div>
           </div>
           <span className="has-text-danger is-size-6">
-            {error.shop ? error.shop : ""}
+            {error.shopId ? error.shopId : ""}
           </span>
         </div>
         <div className="control column">
