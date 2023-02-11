@@ -6,7 +6,7 @@ const validationRules = {
       let x = parseInt(val)
       return typeof x === "number" && x > 0
     },
-    error: "Please select a shop",
+    error: "Please select a shop.",
   },
 }
 
@@ -24,14 +24,6 @@ function saveReview(formValues, onSuccess) {
 }
 
 export default function AddReviewAddReview(props) {
-  const { currentReviewAddEdit: curReview } = props
-
-  // const [curReview, setCurReview] = React.useState(
-  //   Object.keys(props.currentReviewAddEdit).length > 0
-  //     ? props.currentReviewAddEdit
-  //     : emptyReview
-  // )
-
   const [error, setError] = React.useState({})
 
   React.useEffect(() => {
@@ -75,7 +67,10 @@ export default function AddReviewAddReview(props) {
           <span class="label">Shop</span>
           <div class="control">
             <div class="select">
-              <select name="shopId" defaultValue={curReview.shopId}>
+              <select
+                name="shopId"
+                defaultValue={props.currentReviewAddEdit.shopId}
+              >
                 <option value="0">Select</option>
                 {props.shops.map((x) => {
                   return <option value={x.id}>{x.name}</option>
@@ -98,7 +93,10 @@ export default function AddReviewAddReview(props) {
         <label class="label">Rating</label>
         <div class="control">
           <div class="select">
-            <select name="rating" defaultValue={curReview.rating}>
+            <select
+              name="rating"
+              defaultValue={props.currentReviewAddEdit.rating}
+            >
               {[0, 1, 2, 3, 4, 5].map((x) => {
                 return <option value={x}>{x}</option>
               })}
@@ -114,7 +112,7 @@ export default function AddReviewAddReview(props) {
             name="description"
             class="textarea"
             placeholder="Description"
-            defaultValue={curReview.description}
+            defaultValue={props.currentReviewAddEdit.description}
           ></textarea>
         </div>
       </div>

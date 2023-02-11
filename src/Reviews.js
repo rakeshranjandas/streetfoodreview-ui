@@ -24,6 +24,26 @@ export default function Reviews() {
       })
   }, [])
 
+  function addEditShops(newShopData) {
+    let prevShops = [...shops]
+    let done = false
+
+    for (let i = 0; i < prevShops.length; i++) {
+      if (prevShops[i].id == newShopData.id) {
+        prevShops[i] = { ...newShopData }
+        done = true
+      }
+    }
+
+    if (!done) prevShops.push({ ...newShopData })
+
+    setShops(prevShops)
+
+    setCurrentReviewAddEdit((p) => {
+      return { ...p, shopId: newShopData.id }
+    })
+  }
+
   function changeView(e) {
     setCurrentView(e.target.value)
   }
@@ -77,7 +97,7 @@ export default function Reviews() {
         currentReviewAddEdit={currentReviewAddEdit}
         setCurrentReviewAddEdit={setCurrentReviewAddEdit}
         shops={shops}
-        setShops={setShops}
+        addEditShops={addEditShops}
         isModalOpen={isModalOpen}
       />
     </div>
