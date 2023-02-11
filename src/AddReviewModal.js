@@ -17,7 +17,6 @@ export default function AddReviewModal(props) {
   }
 
   function bindCloseActions() {
-    // Add a click event on various child elements to close the parent modal
     ;(
       document.querySelectorAll(
         ".modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button"
@@ -26,16 +25,6 @@ export default function AddReviewModal(props) {
       $close.addEventListener("click", () => {
         closeModal()
       })
-    })
-
-    // Add a keyboard event to close all modals
-    document.addEventListener("keydown", (event) => {
-      const e = event || window.event
-
-      if (e.keyCode === 27) {
-        // Escape key
-        closeModal()
-      }
     })
   }
 

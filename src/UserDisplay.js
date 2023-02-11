@@ -16,7 +16,7 @@ export default function UserDisplay() {
 
   return (
     <div className="container">
-      <div class="tabs is-toggle">
+      <div className="tabs is-toggle">
         <ul>
           <CustomLi to="/reviews">Reviews</CustomLi>
           <CustomLi to="/friends">Friends</CustomLi>
